@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+        <!-- Controllers -->
+        <script>
+            var app = angular.module("myApp", []);
+            app.controller("ShowIPCtrl", function($scope, $http){
+                $http.get("http://ipinfo.io/ip/").success(function(data){
+                    $scope.currentIP = data;
+                })
+                // $scope.currentIP = '';
+            });
+        </script>
+    </head>
+    <body ng-controller="ShowIPCtrl">
+        <div>
+            <p>Current IP is: {{currentIP||"None"}}</p>
+        </div>
+    </body>
+</html>
