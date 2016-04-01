@@ -7,7 +7,7 @@
         <script>
             var app = angular.module("myApp", []);
             app.controller("ShowIPCtrl", function($scope, $http){
-                $http.get("http://ipinfo.io/ip/").success(function(data){
+                $http.get("https://ipinfo.io/ip/").success(function(data){
                     $scope.currentIP = data;
                 })
                 // $scope.currentIP = '';
