@@ -27,19 +27,19 @@ hoge, piyo = piyo, hoge
 
 执行命令 `python -m dis foo.py` ，结果是什么呢？如下：
 ```
-  1           0 LOAD_CONST               0 ('a')  
-              3 STORE_NAME               0 (a)  
-  
-  2           6 LOAD_CONST               1 ('b')  
-              9 STORE_NAME               1 (b)  
-  
-  3          12 LOAD_NAME                1 (b)  
-             15 LOAD_NAME                0 (a)  
-             18 ROT_TWO  
-             19 STORE_NAME               0 (a)  
-             22 STORE_NAME               1 (b)  
-             25 LOAD_CONST               2 (None)  
-             28 RETURN_VALUE  
+  1           0 LOAD_CONST               0 (1)
+              3 STORE_NAME               0 (hoge)
+
+  2           6 LOAD_CONST               1 (2)
+              9 STORE_NAME               1 (piyo)
+
+  3          12 LOAD_NAME                1 (piyo)
+             15 LOAD_NAME                0 (hoge)
+             18 ROT_TWO
+             19 STORE_NAME               0 (hoge)
+             22 STORE_NAME               1 (piyo)
+             25 LOAD_CONST               2 (None)
+             28 RETURN_VALUE
 ```
 
 可见并没有出现理论上应该出现的那个数组，究其原因，其实是Python的某些虚拟机，如CPython，在处理类似的「互换」操作时，提供了专门的优化指令「ROT_TWO」，该指令能够直接操作 stack 顶部的两个值，而并不会先计算表达式再赋值。
